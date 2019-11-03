@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h2>Grocery List</h2>
+
+    <div>
+      <button onclick="handlers.displayGroceries()">
+        Display Grocery List
+      </button>
+      <button onclick="handlers.toggleAll()">Toggle All</button>
+    </div>
+
+    <div>
+      <input type="text" id="addItem" />
+      <button onclick="handlers.addItem()">Add</button>
+    </div>
+
+    <div>
+      <input type="number" id="changeItemPositionInput" />
+      <input type="text" id="changeItemTextInput" />
+      <button onclick="handlers.changeItem()">Change Item</button>
+    </div>
+
+    <div>
+      <input type="number" id="deleteItem" />
+      <button onclick="handlers.deleteItem()">Delete</button>
+    </div>
+
+    <div>
+      <input type="number" id="toggleCompleted" />
+      <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
+    </div>
+
+    <script src="scripts.js"></script>
+  </body>
+</html>
