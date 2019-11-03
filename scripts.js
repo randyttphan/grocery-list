@@ -1,38 +1,21 @@
 //object to hold grocery list and its primary functions
 var groceryList = {
   groceries: [],
-  displayGroceries: function() {
-    if (this.groceries.length === 0) {
-      console.log("Your grocery list is empty! Go ahead and add something.");
-    } else {
-      for (var i = 0; i < this.groceries.length; i++) {
-        if (this.groceries[i].completed === true) {
-          console.log("(x)", this.groceries[i].groceryText);
-        } else {
-          console.log("()", this.groceries[i].groceryText);
-        }
-      }
-    }
-  },
   addGrocery: function(groceryText) {
     this.groceries.push({
       groceryText: groceryText,
       completed: false
     });
-    this.displayGroceries();
   },
   changeGroceries: function(position, groceryTexts) {
     this.groceries[position].groceryText = groceryTexts;
-    this.displayGroceries();
   },
   deleteGrocery: function(position) {
     this.groceries.splice(position, 1);
-    this.displayGroceries();
   },
   toggleCompleted: function(position) {
     var grocery = this.groceries[position];
     grocery.completed = !grocery.completed;
-    this.displayGroceries();
   },
   toggleAll: function() {
     var completedItems = 0;
@@ -55,21 +38,18 @@ var groceryList = {
         this.groceries[i].completed = true;
       }
     }
-    this.displayGroceries();
   }
 };
 
 //Event handlers for buttons
 var handlers = {
-  displayGroceries: function() {
-    groceryList.displayGroceries();
-  },
   addItem: function() {
     var addInput = document.getElementById("addItem");
     groceryList.addGrocery(addInput.value);
 
     //clears input after button submit
     addInput.value = "";
+    view.displayGroceries();
   },
   changeItem: function() {
     var changeItemPositionInput = document.getElementById(
@@ -85,18 +65,45 @@ var handlers = {
     //reset input fields after submit
     changeItemPositionInput.value = "";
     changeItemTextInput.value = "";
+    view.displayGroceries();
   },
   deleteItem: function() {
     var deleteInput = document.getElementById("deleteItem");
     groceryList.deleteGrocery(deleteInput.valueAsNumber);
     deleteInput.value = "";
+    view.displayGroceries();
   },
   toggleCompleted: function() {
     var toggleNumber = document.getElementById("toggleCompleted");
     groceryList.toggleCompleted(toggleNumber.valueAsNumber);
     toggleNumber.value = "";
+    view.displayGroceries();
   },
   toggleAll: function() {
     groceryList.toggleAll();
+    view.displayGroceries();
+  }
+};
+
+//creating an object responsible for what the user sees, rendering the data
+var view = {
+  displayGroceries: function() {
+    var groceryUl = document.querySelector("ul");
+    groceryUl.innerHTML = "";
+
+    for (var i = 0; i < groceryList.groceries.length; i++) {
+      var groceryLi = document.createElement("li");
+      var grocery = groceryList.groceries[i];
+      var groceryTextWithCompletion = "";
+
+      if (grocery.completed === true) {
+        groceryTextWithCompletion = "(x)" + grocery.groceryText;
+      } else {
+        groceryTextWithCompletion = "( )" + grocery.groceryText;
+      }
+
+      groceryLi.textContent = groceryTextWithCompletion;
+      groceryUl.appendChild(groceryLi);
+    }
   }
 };
