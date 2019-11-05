@@ -103,7 +103,14 @@ var view = {
       }
 
       groceryLi.textContent = groceryTextWithCompletion;
+      groceryLi.appendChild(this.createDeleteButton());
       groceryUl.appendChild(groceryLi);
     }
+  },
+  createDeleteButton: function() {
+    var deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    deleteButton.className = "deleteButton";
+    return deleteButton;
   }
 };
