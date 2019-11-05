@@ -134,9 +134,9 @@ var view = {
       var groceryTextWithCompletion = "";
 
       if (grocery.completed === true) {
-        groceryTextWithCompletion = "(x)" + grocery.groceryText;
+        groceryTextWithCompletion = "(x) " + grocery.groceryText;
       } else {
-        groceryTextWithCompletion = "( )" + grocery.groceryText;
+        groceryTextWithCompletion = "( ) " + grocery.groceryText;
       }
 
       groceryLi.id = position;

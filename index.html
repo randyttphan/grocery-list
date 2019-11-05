@@ -4,33 +4,31 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
+    <title>Grocery List</title>
   </head>
   <body>
     <h2>Grocery List</h2>
 
-    <div>
-      <button onclick="handlers.toggleAll()">Toggle All</button>
+    <div class="container">
+      <div class="item">
+        <input type="text" id="addItem" />
+        <button onclick="handlers.addItem()">Add</button>
+      </div>
+      <div class="item">
+        <input type="number" id="changeItemPositionInput" />
+        <input type="text" id="changeItemTextInput" />
+        <button onclick="handlers.changeItem()">Change Item</button>
+      </div>
+      <div class="item">
+        <input type="number" id="toggleCompleted" />
+        <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
+      </div>
+      <div class="item">
+        <button onclick="handlers.toggleAll()">Toggle All</button>
+      </div>
+      <ul></ul>
     </div>
-
-    <div>
-      <input type="text" id="addItem" />
-      <button onclick="handlers.addItem()">Add</button>
-    </div>
-
-    <div>
-      <input type="number" id="changeItemPositionInput" />
-      <input type="text" id="changeItemTextInput" />
-      <button onclick="handlers.changeItem()">Change Item</button>
-    </div>
-
-    <div>
-      <input type="number" id="toggleCompleted" />
-      <button onclick="handlers.toggleCompleted()">Toggle Completed</button>
-    </div>
-
-    <ul></ul>
-
     <script src="scripts.js"></script>
   </body>
 </html>
