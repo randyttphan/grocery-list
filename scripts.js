@@ -67,10 +67,8 @@ var handlers = {
     changeItemTextInput.value = "";
     view.displayGroceries();
   },
-  deleteItem: function() {
-    var deleteInput = document.getElementById("deleteItem");
-    groceryList.deleteGrocery(deleteInput.valueAsNumber);
-    deleteInput.value = "";
+  deleteItem: function(position) {
+    groceryList.deleteGrocery(position);
     view.displayGroceries();
   },
   toggleCompleted: function() {
@@ -102,6 +100,7 @@ var view = {
         groceryTextWithCompletion = "( )" + grocery.groceryText;
       }
 
+      groceryLi.id = i;
       groceryLi.textContent = groceryTextWithCompletion;
       groceryLi.appendChild(this.createDeleteButton());
       groceryUl.appendChild(groceryLi);
@@ -112,5 +111,22 @@ var view = {
     deleteButton.textContent = "Delete";
     deleteButton.className = "deleteButton";
     return deleteButton;
+  },
+  setUpEventListeners: function() {
+    var groceryUl = document.querySelector("ul");
+    groceryUl.addEventListener("click", function(event) {
+      console.log(event.target.parentNode.id);
+
+      //get the element that was clicked on
+      var elementClicked = event.target;
+
+      //check if elementclicked is a delete button
+      if (elementClicked.className === "deleteButton") {
+        //run handlers.deleteItem();
+        handlers.deleteItem(parseInt(elementClicked.parentNode.id));
+      }
+    });
   }
 };
+
+view.setUpEventListeners();
