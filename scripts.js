@@ -22,22 +22,44 @@ var groceryList = {
     var totalItems = this.groceries.length;
 
     //Get number of completed items.
-    for (var i = 0; i < totalItems; i++) {
-      if (this.groceries[i].completed === true) {
+    // for (var i = 0; i < totalItems; i++) {
+    //   if (this.groceries[i].completed === true) {
+    //     completedItems++;
+    //   }
+    // }
+
+    //forEach
+    this.groceries.forEach(function(grocery) {
+      if (grocery.completed === true) {
         completedItems++;
       }
-    }
+    });
 
-    //Case 1: if everything is true, make everything false.
-    if (completedItems === totalItems) {
-      for (var i = 0; i < totalItems; i++) {
-        this.groceries[i].completed = false;
+    // //Case 1: if everything is true, make everything false.
+    // if (completedItems === totalItems) {
+    //   // for (var i = 0; i < totalItems; i++) {
+    //   //   this.groceries[i].completed = false;
+    //   this.groceries.forEach(function(grocery) {
+    //     grocery.completed = false;
+    //   });
+    // } else {
+    //   // for (var i = 0; i < totalItems; i++) {
+    //   //   this.groceries[i].completed = true;
+    //   this.groceries.forEach(function(grocery) {
+    //     grocery.completed = true;
+    //   });
+    // }
+
+    //refactoring the commented code above
+    this.groceries.forEach(function(grocery) {
+      //case 1: if everything is true, make everything false
+      if (completedItems === totalItems) {
+        grocery.completed = false;
+      } else {
+        //case 2: otherwise make everything true
+        grocery.completed = true;
       }
-    } else {
-      for (var i = 0; i < totalItems; i++) {
-        this.groceries[i].completed = true;
-      }
-    }
+    });
   }
 };
 
@@ -89,9 +111,26 @@ var view = {
     var groceryUl = document.querySelector("ul");
     groceryUl.innerHTML = "";
 
-    for (var i = 0; i < groceryList.groceries.length; i++) {
+    // for (var i = 0; i < groceryList.groceries.length; i++) {
+    //   var groceryLi = document.createElement("li");
+    //   var grocery = groceryList.groceries[i];
+    //   var groceryTextWithCompletion = "";
+
+    //   if (grocery.completed === true) {
+    //     groceryTextWithCompletion = "(x)" + grocery.groceryText;
+    //   } else {
+    //     groceryTextWithCompletion = "( )" + grocery.groceryText;
+    //   }
+
+    //   groceryLi.id = i;
+    //   groceryLi.textContent = groceryTextWithCompletion;
+    //   groceryLi.appendChild(this.createDeleteButton());
+    //   groceryUl.appendChild(groceryLi);
+    // }
+
+    //refactor forloop above.
+    groceryList.groceries.forEach(function(grocery, position) {
       var groceryLi = document.createElement("li");
-      var grocery = groceryList.groceries[i];
       var groceryTextWithCompletion = "";
 
       if (grocery.completed === true) {
@@ -100,11 +139,11 @@ var view = {
         groceryTextWithCompletion = "( )" + grocery.groceryText;
       }
 
-      groceryLi.id = i;
+      groceryLi.id = position;
       groceryLi.textContent = groceryTextWithCompletion;
       groceryLi.appendChild(this.createDeleteButton());
       groceryUl.appendChild(groceryLi);
-    }
+    }, this);
   },
   createDeleteButton: function() {
     var deleteButton = document.createElement("button");
